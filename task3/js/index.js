@@ -32,7 +32,7 @@ const message = 'じゃんけんをします。1か2か3を入力してくださ
 let inputNumber = 0
 while (judgement === rockPaparScissorsRule.draw) {
   inputNumber = window.prompt(message)
-  const input = parseInt(inputNumber, 10)
+  const input = Number.parseInt(inputNumber, 10)
   console.log(input)
   console.log('ぽい')
   const computerNumber = Math.floor(Math.random() * 3)

@@ -10,5 +10,5 @@ function recursive(number) {
 
 let input = 0
 input = window.prompt('何か数字を入力してください')
-const inputNumber = parseInt(input, 10)
+const inputNumber = Number.parseInt(input, 10)
 console.log(recursive(inputNumber))
