@@ -1,8 +1,7 @@
 'use strict'
 
-const numbers = [20, 31, 42, 13, 5, 38]
-
-function bubble(array) {
+function bubble(ary) {
+  const array = Array.from(ary) // for deep copy
   const sortedArray = []
 
   const arrayLength = array.length
@@ -21,42 +20,47 @@ function bubble(array) {
   return sortedArray
 }
 
-const sorted = []
-function quick(a) {
-  const ary = Array.from(a)
+function quick(ary, sorted) {
   if (ary.length === 0) {
+    return sorted
   } else if (ary.length === 1) {
     sorted.push(ary[0])
+    return sorted
   } else if (ary.length === 2) {
     sorted.push(ary[0] > ary[1] ? ary[0] : ary[1])
     sorted.push(ary[0] > ary[1] ? ary[1] : ary[0])
-  } else {
-    let pivot = 0
-    let arrayU = []
-    let arrayL = []
-    for (let i = 0; i < ary.length; ++i) {
-      pivot = ary[i]
-      arrayU = ary.filter(item => item > pivot)
-      arrayL = ary.filter(item => item <= pivot)
-      if (arrayU.length !== 0 && arrayL.length !== 0) {
-        break
-      }
-    }
-
-    quick(Array.from(arrayU))
-    quick(Array.from(arrayL))
+    return sorted
   }
+
+  let pivot = 0
+  let arrayU = []
+  let arrayL = []
+  for (let i = 0; i < ary.length; ++i) {
+    pivot = ary[i]
+    arrayU = ary.filter(item => item > pivot)
+    arrayL = ary.filter(item => item <= pivot)
+    if (arrayU.length !== 0 && arrayL.length !== 0) {
+      break
+    }
+  }
+
+  sorted = quick(arrayU, sorted)
+  sorted = quick(arrayL, sorted)
+
+  return sorted
 }
 
-const sortedArray = bubble(numbers)
+const numbers = [20, 31, 42, 13, 5, 38]
+
+console.log('bubble sort')
+let sortedArray = bubble(numbers)
 sortedArray.forEach(item => {
-  // console.log(item)
+  console.log(item)
 })
 
-const numbers2 = [20, 31, 42, 13, 5, 38]
-quick(Array.from(numbers2))
-
-console.log('sorted')
-sorted.forEach(item => {
+console.log('quick sort')
+sortedArray = []
+sortedArray = quick(numbers, sortedArray)
+sortedArray.forEach(item => {
   console.log(item)
 })
