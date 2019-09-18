@@ -20,7 +20,7 @@ function bubble(ary) {
   return sortedArray
 }
 
-function quick(ary, sorted) {
+function quickSub(ary, sorted) {
   if (ary.length === 0) {
     return sorted
   } else if (ary.length === 1) {
@@ -44,10 +44,15 @@ function quick(ary, sorted) {
     }
   }
 
-  sorted = quick(arrayU, sorted)
-  sorted = quick(arrayL, sorted)
+  sorted = quickSub(arrayU, sorted)
+  sorted = quickSub(arrayL, sorted)
 
   return sorted
+}
+
+function quick(ary) {
+  const sorted = []
+  return quickSub(ary, sorted)
 }
 
 const numbers = [20, 31, 42, 13, 5, 38]
