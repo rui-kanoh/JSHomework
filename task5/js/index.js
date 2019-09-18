@@ -32,11 +32,17 @@ function quick(ary, sorted) {
     return sorted
   }
 
-  let index = Math.floor(Math.random() * ary.length)
-  index = index === ary.length ? index - 1 : index
-  const pivot = ary[index]
-  const arrayU = ary.filter(item => item > pivot)
-  const arrayL = ary.filter(item => item <= pivot)
+  let pivot = 0
+  let arrayU = []
+  let arrayL = []
+  for (let i = 0; i < ary.length; ++i) {
+    pivot = ary[i]
+    arrayU = ary.filter(item => item > pivot)
+    arrayL = ary.filter(item => item <= pivot)
+    if (arrayU.length !== 0 && arrayL.length !== 0) {
+      break
+    }
+  }
 
   sorted = quick(arrayU, sorted)
   sorted = quick(arrayL, sorted)
