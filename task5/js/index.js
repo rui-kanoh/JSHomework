@@ -55,17 +55,41 @@ function quick(ary) {
   return quickSub(ary, sorted)
 }
 
+function displayResults(ary) {
+  let total = 0
+  let average = 0
+  let minimum = Number.MAX_SAFE_INTEGER
+  let maximum = Number.MIN_SAFE_INTEGER
+  let ascending = ''
+  let descending = ''
+  ary.forEach(item => {
+    total += item
+    if (minimum > item) {
+      minimum = item
+    }
+
+    if (maximum < item) {
+      maximum = item
+    }
+    ascending = item.toString() + ' ' + ascending
+    descending += item.toString() + ' '
+  })
+  average = total / sortedArray.length
+  console.log('合計: ' + total.toString())
+  console.log('平均: ' + average.toString())
+  console.log('最大値' + maximum.toString())
+  console.log('最小値' + minimum.toString())
+  console.log('大きい順: ' + ascending)
+  console.log('小さい順: ' + descending)
+}
+
 const numbers = [20, 31, 42, 13, 5, 38]
 
 console.log('bubble sort')
 let sortedArray = bubble(numbers)
-sortedArray.forEach(item => {
-  console.log(item)
-})
+displayResults(sortedArray)
 
 console.log('quick sort')
 sortedArray = []
-sortedArray = quick(numbers, sortedArray)
-sortedArray.forEach(item => {
-  console.log(item)
-})
+sortedArray = quick(numbers)
+displayResults(sortedArray)
