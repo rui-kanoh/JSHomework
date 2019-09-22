@@ -47,9 +47,48 @@ function createRandomValue() {
   }
 
   const answerStr = first.toString() + second.toString() + third.toString() + forth.toString()
-  const answer = Number.parseInt(answerStr)
-  return answer
+  return answerStr
 }
 
-const answer = createRandomValue()
-console.log(('0000' + answer.toString()).slice(-4))
+const answerStr = createRandomValue()
+
+const retryNum = 9
+for (let i = 0; i < retryNum; ++i) {
+  const str = window.prompt('4桁の数字は？')
+  if (str === '') {
+    console.log('終了します。')
+    break
+  }
+
+  if (str.length !== 4) {
+    console.log('入力値が4桁ではありません。')
+    continue
+  }
+
+  let hit = 0
+  let blow = 0
+  for (let i = 0; i < str.length; ++i) {
+    if (answerStr[i] === str[i]) {
+      ++blow
+    }
+
+    for (const ans of answerStr) {
+      if (ans === str[i]) {
+        ++hit
+      }
+    }
+  }
+
+  if (blow === str.length) {
+    console.log((i + 1).toString() + '回で正解!')
+    break
+  } else {
+    console.log('外れ: ' + hit.toString() + 'Hits, ' + blow.toString() + 'Blow')
+    if (i === retryNum - 1) {
+      console.log('既定の回数を超えました。正解は' + answerStr + 'です。')
+      break
+    } else {
+      continue
+    }
+  }
+}
