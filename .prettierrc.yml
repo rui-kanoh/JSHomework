@@ -1,0 +1,4 @@
+semi: false
+singleQuote: true
+trailingCOmma: es5
+printWidth: 120
