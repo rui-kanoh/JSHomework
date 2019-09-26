@@ -1,5 +1,15 @@
 'use strict'
 
+function changeFromFooToUryyy(ary) {
+  for (const key in ary) {
+    if (typeof ary[key] === 'object') {
+      changeFromFooToUryyy(ary[key])
+    } else {
+      ary[key] = ary[key].replace('foo', 'uryyy!!')
+    }
+  }
+}
+
 const hash = {
   main: {
     first: { text: 'foobar' },
@@ -15,4 +25,6 @@ const hash = {
   text: 'foofava'
 }
 
+console.log(JSON.stringify(hash))
+changeFromFooToUryyy(hash)
 console.log(JSON.stringify(hash))
